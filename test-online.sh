@@ -3,7 +3,7 @@
 # 测试在线域名获取功能
 echo "=== 测试在线域名获取功能 ==="
 
-API_URL="https://pikachuim.github.io/luci-app-fuck-pcdn/banlist.json"
+API_URL="https://raw.githubusercontent.com/NiYukk/luci-app-fuck-pcdn/refs/heads/main/banlist.json"
 
 echo "正在从 $API_URL 获取域名列表..."
 
