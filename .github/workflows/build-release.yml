@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Environment
         run: |
@@ -94,7 +94,7 @@ jobs:
           ls -la ../luci-app-fuck-pcdn_${{ matrix.target.arch }}.ipk
           
       - name: Upload IPK Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: luci-app-fuck-pcdn-${{ matrix.target.arch }}
           path: luci-app-fuck-pcdn_${{ matrix.target.arch }}.ipk
@@ -107,17 +107,17 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         
       - name: Download All Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           path: artifacts
           
       - name: Prepare Release Files
         run: |
           mkdir -p release
-          find artifacts -name "*.ipk" -exec cp {} release/ \;
+          find artifacts -name "*.ipk" -exec cp {} release/ \; 
           ls -la release/
           
           # Create checksums
@@ -170,19 +170,3 @@ jobs:
           请使用 SHA256SUMS 文件验证下载文件的完整性：
           ```bash
           sha256sum -c SHA256SUMS
-          ```
-          EOF
-          
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.get_tag.outputs.tag }}
-          name: LuCI App Fuck PCDN ${{ steps.get_tag.outputs.tag }}
-          body_path: release_notes.md
-          files: |
-            release/*.ipk
-            release/SHA256SUMS
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
