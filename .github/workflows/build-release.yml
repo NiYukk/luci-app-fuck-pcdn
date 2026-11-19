@@ -49,7 +49,7 @@ jobs:
       - name: Setup Environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libncurses5-dev libncursesw5-dev \
+          sudo apt-get install -y coreutils build-essential libncurses5-dev libncursesw5-dev \
             zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 zstd
           
       - name: Download OpenWrt SDK
@@ -117,7 +117,7 @@ jobs:
       - name: Prepare Release Files
         run: |
           mkdir -p release
-          find artifacts -name "*.ipk" -exec cp {} release/ \; 
+          find artifacts -name "*.ipk" -exec cp {} release/ \;
           ls -la release/
           
           # Create checksums
